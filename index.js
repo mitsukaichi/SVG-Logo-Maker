@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 import * as fs from 'node:fs';
-import {Circle, Triangle} from "./lib/shapes.js";
+import {Circle, Triangle, Square} from "./lib/shapes.js";
 
 const questions = [
     {
@@ -69,13 +69,14 @@ function init() {
         if (response.shape[0] === 'circle') {
             const newShape = new Circle;
             const svgContent = createSvgContent(newShape,response);
-            console.log(svgContent);
             createFile("./examples/logo.svg",svgContent);
         } else if (response.shape[0] === 'triangle') {
             const newShape = new Triangle;
-            console.log(newShape);
             const svgContent = createSvgContent(newShape,response);
-            console.log(svgContent);
+            createFile("./examples/logo.svg",svgContent);
+        } else if (response.shape[0] === 'square') {
+            const newShape = new Square;
+            const svgContent = createSvgContent(newShape,response);
             createFile("./examples/logo.svg",svgContent);
         };
       });
