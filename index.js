@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 import * as fs from 'node:fs';
-import Circle from "./lib/shapes.js";
+import {Circle, Triangle} from "./lib/shapes.js";
 
 const questions = [
     {
@@ -47,6 +47,16 @@ ${textElement}
 </svg>`
 };
 
+function createSvgContent(newShape,response){
+    newShape.setColor(response.shape_color);
+    newShape.setText(response.text);
+    newShape.setTextColor(response.text_color);
+    const shapeElement = newShape.render();
+    const textElement = newShape.renderText();
+    const svgContent = outputFile(shapeElement,textElement);
+    return svgContent;
+}
+
 function createFile(fileName,input) {
     fs.writeFile(fileName,input,(err) =>
     err ? console.error(err) : console.log('Generated logo.svg'));
@@ -56,14 +66,18 @@ function init() {
     inquirer
       .prompt(questions)
       .then((response) => {
-        const newShape = new Circle;
-        newShape.setColor(response.shape_color);
-        newShape.setText(response.text);
-        newShape.setTextColor(response.text_color);
-        const shapeElement = newShape.render();
-        const textElement = newShape.renderText();
-        const svgContent = outputFile(shapeElement,textElement);
-        createFile("./examples/logo.svg",svgContent);
+        if (response.shape[0] === 'circle') {
+            const newShape = new Circle;
+            const svgContent = createSvgContent(newShape,response);
+            console.log(svgContent);
+            createFile("./examples/logo.svg",svgContent);
+        } else if (response.shape[0] === 'triangle') {
+            const newShape = new Triangle;
+            console.log(newShape);
+            const svgContent = createSvgContent(newShape,response);
+            console.log(svgContent);
+            createFile("./examples/logo.svg",svgContent);
+        };
       });
   }
   
