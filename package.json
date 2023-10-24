@@ -10,12 +10,10 @@
   "scripts": {
     "test": "jest"
   },
-  "type":"module",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "inquirer": "^9.2.11",
+    "inquirer": "^8.2.6",
     "jest": "^29.7.0"
   }
 }

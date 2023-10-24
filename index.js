@@ -1,6 +1,12 @@
+/*
 import inquirer from 'inquirer';
 import * as fs from 'node:fs';
 import {Circle, Triangle, Square} from "./lib/shapes.js";
+*/
+
+const fs = require('fs');
+const inquirer = require('inquirer');
+const shapes = require('./lib/shapes.js');
 
 
 const questions = [
@@ -68,15 +74,15 @@ function init() {
       .prompt(questions)
       .then((response) => {
         if (response.shape[0] === 'circle') {
-            const newShape = new Circle;
+            const newShape = new shapes.Circle;
             const svgContent = createSvgContent(newShape,response);
             createFile("./examples/logo.svg",svgContent);
         } else if (response.shape[0] === 'triangle') {
-            const newShape = new Triangle;
+            const newShape = new shapes.Triangle;
             const svgContent = createSvgContent(newShape,response);
             createFile("./examples/logo.svg",svgContent);
         } else if (response.shape[0] === 'square') {
-            const newShape = new Square;
+            const newShape = new shapes.Square;
             const svgContent = createSvgContent(newShape,response);
             createFile("./examples/logo.svg",svgContent);
         };
